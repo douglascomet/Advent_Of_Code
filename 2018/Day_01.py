@@ -86,6 +86,8 @@ You are one gold star closer to fixing the time stream.
 
 import os
 
+import utils
+
 SCRIPT_DIR = os.path.dirname(__file__)
 # print SCRIPT_DIR
 INPUT_DATA_PATH = os.path.join(SCRIPT_DIR, 'test_data', 'Day_01.txt')
@@ -104,28 +106,12 @@ def get_total_frequency(input_data=None):
 
     frequency_result = 0
 
-    input_data = process_data(input_data)
+    input_data = utils.process_data(INPUT_DATA_PATH, input_data)
 
     if input_data:
         frequency_result = sum(input_data)
 
     return frequency_result
-
-def process_data(input_data=None):
-    """
-    Convenience method to read from a data set
-
-    Args:
-        input_data (list, optional): Defaults to None. Series of positive and negative integers
-
-    Returns:
-        list: Series of positive and negative integers
-    """
-
-    if input_data is None:
-        with open(INPUT_DATA_PATH) as fp:
-            input_data = [int(x) for x in fp.read().split('\n') if x]
-    return input_data
 
 def duplicate_frequencies(input_data=None, number_of_occurances=2, frequency_map=None):
     """
@@ -144,7 +130,7 @@ def duplicate_frequencies(input_data=None, number_of_occurances=2, frequency_map
     frequency = 0
     repeated_frequency = None
 
-    input_data = process_data(input_data)
+    input_data = utils.process_data(INPUT_DATA_PATH, input_data)
 
     if frequency_map is None:
         frequency_map = {}
